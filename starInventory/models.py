@@ -3,8 +3,8 @@ from django.db import models
 
 # Create your models here.
 class Customer(models.Model):
-    name = models.TextField(null=False, blank=False)
-    phoneNumber = models.TextField(null=False, blank=False)
+    name = models.CharField(null=False, blank=False, max_length=50)
+    phoneNumber = models.CharField(null=False, blank=False, max_length=15)
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -13,12 +13,12 @@ class Customer(models.Model):
 
 
 class Product(models.Model):
-    name = models.TextField(null=False, blank=False)
+    name = models.CharField(null=False, blank=False, max_length=20)
     price = models.FloatField(null=False, blank=False)
 
 
 class Part(models.Model):
-    name = models.TextField(null=False, blank=False)
+    name = models.CharField(null=False, blank=False, max_length=20)
     stock = models.IntegerField(null=False, blank=False, default=0)
     cost = models.FloatField(null=False, blank=False)
 
