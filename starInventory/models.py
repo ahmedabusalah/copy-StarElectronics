@@ -39,13 +39,13 @@ class Product(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    product = models.ManyToManyField(Product, through='CustomerOrder')
+    product = models.ManyToManyField(Product, through='OrderProduct')
 
     def __str__(self):
         return f"{self.id} - {self.customer.name} order"
 
 
-class CustomerOrder(models.Model):
+class OrderProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity = models.IntegerField(null=False, blank=False, default=1)
@@ -55,7 +55,7 @@ class CustomerOrder(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=('product', 'order'), name='once_per_customer_order')
+            models.UniqueConstraint(fields=('product', 'order'), name='once_per_order_product')
         ]
 
 
